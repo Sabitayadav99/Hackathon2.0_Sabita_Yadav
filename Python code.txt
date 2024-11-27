@@ -1,0 +1,200 @@
+Importing Libraries
+
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+
+Importing Drive
+
+from google.colab import drive
+drive.mount('/content/drive')
+
+Importing Datasets
+
+df1=pd.read_csv("/content/drive/MyDrive/Sabita/Datasets/HackathonData/EV Maker by Place.csv")
+df2=pd.read_csv("/content/drive/MyDrive/Sabita/Datasets/HackathonData/OperationalPC.csv")
+df3=pd.read_csv("/content/drive/MyDrive/Sabita/Datasets/HackathonData/Vehicle Class - All.csv")
+df4=pd.read_csv("/content/drive/MyDrive/Sabita/Datasets/HackathonData/ev_cat_01-24.csv")
+df5=pd.read_csv("/content/drive/MyDrive/Sabita/Datasets/HackathonData/ev_sales_by_makers_and_cat_15-24.csv")
+
+Displaying Datasets
+
+df1
+df2
+df3
+df4
+df5
+
+Exploring Data by statistical analysis of numerical data
+
+dfs=[df1,df2,df3,df4,df5]
+for df in dfs:
+  print(df.describe())
+
+
+Checking for basic information of Data
+
+df1.info()
+print('\n\n')
+df2.info()
+print('\n\n')
+df3.info()
+print('\n\n')
+df4.info()
+print('\n\n')
+df5.info()
+
+Looking for null values if have
+
+print(df1.isnull().sum())
+print('\n')
+print(df2.isnull().sum())
+print('\n')
+print(df3.isnull().sum())
+print('\n')
+print(df4.isnull().sum())
+print('\n')
+print(df5.isnull().sum())
+
+Changing Data type of Total Registeration column
+
+df3['Total Registration']=pd.to_numeric(df3['Total Registration'].str.replace(',',''))
+
+df3
+
+df3.info()
+
+Cleaning Data by removing unusual row values from Date column
+
+df4=df4[df4['Date']!='0']
+
+Changing data type of Date column to datetime
+
+df4['Date']=pd.to_datetime(df4['Date'], format='%d/%m/%y')
+
+df4
+
+Again checking for info and null values
+
+df1.info()
+print('\n\n')
+df2.info()
+print('\n\n')
+df3.info()
+print('\n\n')
+df4.info()
+print('\n\n')
+df5.info()
+
+print(df1.isnull().sum())
+print('\n')
+print(df2.isnull().sum())
+print('\n')
+print(df3.isnull().sum())
+print('\n')
+print(df4.isnull().sum())
+print('\n')
+print(df5.isnull().sum())
+
+Checking for outliers
+
+dfs=[df1,df2,df3,df4,df5]
+for df in dfs:
+  print(df.shape)
+  sns.boxplot(data=df)
+  plt.xticks(rotation=90)
+  plt.yscale('log')
+  plt.show()
+
+dfs=[df1,df2,df3,df4,df5]
+for df in dfs:
+  print(df.shape)
+
+# dfs=[df1,df2,df3,df4,df5]
+# for df in dfs:
+#   numeric_df = df.select_dtypes(include='number')
+#   Q1 = numeric_df.quantile(0.25)
+#   Q3 = numeric_df.quantile(0.75)
+#   IQR = Q3 - Q1
+#   df_out = numeric_df[~((numeric_df < (Q1 - 1.5 * IQR)) | (numeric_df > (Q3 + 1.5 * IQR))).any(axis=1)]
+#   print(df_out.shape)
+
+Creating year and month column to analyze trends
+
+df4['Year']=df4['Date'].dt.year
+df4['Month']=df4['Date'].dt.month_name()
+
+df4
+
+dfs=[df1,df2,df3,df4,df5]
+for df in dfs:
+  print(df.info())
+
+Plotting Bar chart to see the trend
+
+plt.figure(figsize=(12,8))
+df1['State'].value_counts().plot(kind='bar')
+
+plt.figure(figsize=(12,8))
+df1['Place'].value_counts().plot(kind='bar')
+
+Analyzing the Distribution of EV Manufacturing Plants Across States
+
+EV_Makers_Per_State=df1['State'].value_counts()
+EV_Makers_Per_State.to_csv('EV_Makers_Per_State.csv')
+EV_Makers_Per_State
+
+Analyzing the Distribution of EV Manufacturing Plants Across Places
+
+EV_Makers_Per_Place=df1['Place'].value_counts()
+EV_Makers_Per_Place.to_csv('EV_Makers_Per_Place.csv')
+EV_Makers_Per_Place
+
+Top_States= df2.sort_values(by="No. of Operational PCS", ascending=False).head(7)
+Top_States
+
+Top_States.to_csv('Top_seven_states_having_PCS.csv', index=False)
+Top_States
+
+Extracting Top 7 Vehicle Classes with the Highest Registrations
+
+Top_Registration=df3.sort_values(by='Total Registration', ascending=False).head(7)
+Top_Registration
+
+Top_Registration.to_csv('Top_7_Registration.csv',index=False)
+
+Aggregated Yearly Data of Electric Vehicle (EV) Manufacturing by Category from 2001 to 2024
+
+Yearly_Data=df4.groupby(['Year']).sum(numeric_only=True)
+Yearly_Data.to_csv('Yearly_Data.csv')
+Yearly_Data
+
+Organizing and Sorting Monthly Aggregated Data
+
+Monthly_Data=df4.groupby(['Month']).sum(numeric_only=True)
+month_order=['January', 'February', 'March', 'April', 'May', 'June','July', 'August', 'September', 'October', 'November', 'December']
+Monthly_Data.reset_index(inplace=True)
+Monthly_Data['Month'] = pd.Categorical(Monthly_Data['Month'],categories=month_order,ordered=True)
+Monthly_Data = Monthly_Data.sort_values(by=['Month'])
+Monthly_Data.to_csv('Monthy_Data.csv')
+Monthly_Data
+
+Total Sales of Electric Vehicles by Category (2015 - 2024)
+
+Total_Sales_By_Category = df5.groupby('Cat').sum(numeric_only=True).reset_index()
+Total_Sales_By_Category['Total_Sales'] = Total_Sales_By_Category.iloc[:, 2:].sum(axis=1)
+Total_Sales_By_Category.to_csv('Total_Sales_By_Category.csv',index=False)
+Total_Sales_By_Category
+
+Total_Sales_By_Maker=df5.groupby('Maker').sum(numeric_only=True).reset_index()
+Total_Sales_By_Maker
+
+Top 7 Electric Vehicle Makers by Total Sales
+
+Total_Sales_By_Maker['Total Sales']=Total_Sales_By_Maker.iloc[:,2:].sum(axis=1)
+Total_Sales_By_Maker= Total_Sales_By_Maker.sort_values(by='Total Sales',ascending=False).head(7)
+Total_Sales_By_Maker
+
+Total_Sales_By_Maker.to_csv('Total_Sales_By_Maker.csv',index=False)
+
