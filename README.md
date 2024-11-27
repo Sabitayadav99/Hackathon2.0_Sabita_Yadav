@@ -1,7 +1,8 @@
 # Hackathon2.0
-#Electric Vehicle Insights and Analysis (2001–2024) This project provides detailed insights into the Electric Vehicle (EV) industry, showcasing trends, market share, and manufacturing insights from 2001 to 2024. It also analyzes public EV charging stations in India, using Python for data manipulation and Power BI for visualization.
+**#Electric Vehicle Insights and Analysis (2001–2024)** 
+This project provides detailed insights into the Electric Vehicle (EV) industry, showcasing trends, market share, and manufacturing insights from 2001 to 2024. It also analyzes public EV charging stations in India, using Python for data manipulation and Power BI for visualization.
 
-#Project Overview This project includes:
+**#Project Overview This project includes:**
 
 Two Analytical Reports:
 
@@ -11,7 +12,7 @@ Insights into EV Manufacturing and Public Charging Stations in India: Focused an
 
 Python (Pandas for data analysis) Power BI (for creating interactive dashboards and visualizations)
 
-#Project Files
+**#Project Files**
 
 Folder Structure:
 
@@ -25,7 +26,7 @@ A zipped Power BI project file that includes interactive dashboards for deeper i
 
 Datasets: https://drive.google.com/drive/folders/1zQux4u9GeWMEJQrqQgzQXUlWvj2mILnw?usp=sharing
 
-#How to Use
+**#How to Use**
 
 Open Google colab
 
@@ -53,7 +54,7 @@ Key regions leading in EV production and charging station deployment.
 
 Correlation between the rise in public charging stations and EV adoption rates.
 
-#Requirements
+**#Requirements**
 
 Prerequisites:
 
@@ -73,12 +74,12 @@ Datasets:
 
 Ensure the dataset used for the analysis is placed in the root directory.
 
-#Future Scope
+**#Future Scope**
 
 Expand the dataset to include predictions for the EV industry beyond 2024.
 
 Incorporate more visualizations in Power BI to cover additional aspects.
 
-#Contributor
+**#Contributor**
 
 Sabita Yadav
