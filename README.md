@@ -19,7 +19,7 @@ Python Code: https://drive.google.com/file/d/1wVPF4mL-64QEU4c-lWnYjItPoMt-eOIL/v
 
 Contains Python scripts for cleaning, analyzing, and generating insights from the dataset.
 
-Power BI File: https://drive.google.com/file/d/1CzFF2Yg1CdiSugn4Egs97f0bZPuqPzLs/view?usp=sharing
+Power BI File: https://drive.google.com/file/d/1QR73jQPKaL9ud9oLkl3ameGoJyg9p_mw/view?usp=sharing
 
 A zipped Power BI project file that includes interactive dashboards for deeper insights into the dataset.
 
